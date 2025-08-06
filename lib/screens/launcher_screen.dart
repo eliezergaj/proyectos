@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'tutoriales_screen.dart';
+import 'modo_seguro_screen.dart';
 
 class LauncherScreen extends StatefulWidget {
   const LauncherScreen({super.key});
@@ -78,6 +79,17 @@ class _LauncherScreenState extends State {
                       );
                     },
                   ),
+                  _MenuButton(
+                    label: "Modo seguro",
+                    icon: Icons.lock,
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const ModoSeguroScreen()),
+                      );
+                    },
+                  ),
+
                 ],
               ),
             ),

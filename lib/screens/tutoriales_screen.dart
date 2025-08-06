@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class TutorialesScreen extends StatelessWidget {
   const TutorialesScreen({super.key});

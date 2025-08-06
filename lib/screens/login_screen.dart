@@ -6,19 +6,27 @@ class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  State createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
-class _LoginScreenState extends State {
+class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controller = TextEditingController();
 
-  void _saveNameAndContinue() async {
+  void _guardarNombreYContinuar(BuildContext context) async {
     final prefs = await SharedPreferences.getInstance();
-    await prefs.setString('userName', _controller.text);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const LauncherScreen()),
-    );
+    final nombre = _controller.text.trim();
+
+    if (nombre.isNotEmpty) {
+      await prefs.setString('userName', nombre);
+
+      // Verifica si el widget todavía está montado antes de usar el context
+      if (!mounted) return; // Si no está montado, no hagas nada más
+
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (_) => const LauncherScreen()),
+      );
+    }
   }
 
   @override
@@ -33,23 +41,24 @@ class _LoginScreenState extends State {
               const Text(
                 '¿Cómo quieres que te llamemos?',
                 style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
               ),
               const SizedBox(height: 24),
               TextField(
                 controller: _controller,
                 decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
                   labelText: 'Tu nombre',
+                  border: OutlineInputBorder(),
                 ),
               ),
               const SizedBox(height: 24),
               ElevatedButton(
-                onPressed: _saveNameAndContinue,
+                onPressed: () => _guardarNombreYContinuar(context),
                 child: const Text('Entrar'),
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () {},
+                onPressed: () {}, // aquí puedes agregar navegación a modo tutor
                 child: const Text('Soy tutor'),
               ),
             ],
