@@ -1,9 +1,13 @@
+// lib/main.dart
 import 'package:flutter/material.dart';
+import 'package:intl/date_symbol_data_local.dart'; // Importación importante
 import 'package:shared_preferences/shared_preferences.dart';
-import 'screens/launcher_screen.dart';
-import 'screens/login_screen.dart';
+import 'screens/login_screen.dart'; // Asumiendo que esta es tu pantalla de login
+import 'screens/launcher_screen.dart'; // Asumiendo que esta es tu pantalla de launcher
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await initializeDateFormatting('es_CL', null);
   runApp(const AcompanaTechApp());
 }
 

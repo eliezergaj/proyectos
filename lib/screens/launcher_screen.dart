@@ -1,17 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_tts/flutter_tts.dart';
 import 'tutoriales_screen.dart';
 import 'modo_seguro_screen.dart';
-
-// Función reutilizable para leer texto en voz alta
-final FlutterTts flutterTts = FlutterTts();
-Future<void> speak(String text) async {
-  await flutterTts.setLanguage('es-ES');
-  await flutterTts.setPitch(1.0);
-  await flutterTts.speak(text);
-}
 
 class LauncherScreen extends StatefulWidget {
   const LauncherScreen({super.key});
@@ -40,20 +31,11 @@ class _LauncherScreenState extends State {
   Widget build(BuildContext context) {
     String currentTime = DateFormat('HH:mm').format(DateTime.now());
     String currentDate = DateFormat('EEEE d MMMM', 'es_CL').format(DateTime.now());
-    String textoBienvenida = "Bienvenido, $userName. Hoy es $currentDate y son las $currentTime.";
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1D3557),
         title: const Text("AcompañaTech"),
         centerTitle: true,
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.volume_up),
-            tooltip: 'Escuchar',
-            onPressed: () => speak(textoBienvenida),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),
@@ -157,3 +139,4 @@ class _MenuButton extends StatelessWidget {
     );
   }
 }
+

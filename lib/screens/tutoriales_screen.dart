@@ -1,13 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-
-// Función reutilizable para leer texto en voz alta
-final FlutterTts flutterTts = FlutterTts();
-Future<void> speak(String text) async {
-  await flutterTts.setLanguage('es-ES');
-  await flutterTts.setPitch(1.0);
-  await flutterTts.speak(text);
-}
+import 'package:audioplayers/audioplayers.dart';
 
 class TutorialesScreen extends StatelessWidget {
   const TutorialesScreen({super.key});
@@ -21,21 +13,10 @@ class TutorialesScreen extends StatelessWidget {
       TutorialItem(label: 'TikTok', icon: Icons.video_library),
       TutorialItem(label: 'Navegación Segura', icon: Icons.lock),
     ];
-
-    String textoTutoriales = "Cómo usar el celular. Tutoriales disponibles: " +
-      tutoriales.map((t) => t.label).join(", ") + ".";
-
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFF1D3557),
         title: const Text('Tutoriales'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.volume_up),
-            tooltip: 'Escuchar',
-            onPressed: () => speak(textoTutoriales),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(16),

@@ -13,21 +13,18 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _controller = TextEditingController();
 
   void _guardarNombreYContinuar(BuildContext context) async {
-    final localContext = context; // ✅ aseguramos el context antes del await
-
     final prefs = await SharedPreferences.getInstance();
     final nombre = _controller.text.trim();
 
     if (nombre.isNotEmpty) {
       await prefs.setString('userName', nombre);
 
+      // Verifica si el widget todavía está montado antes de usar el context
+      if (!mounted) return; // Si no está montado, no hagas nada más
+
       Navigator.pushReplacement(
-        localContext,
+        context,
         MaterialPageRoute(builder: (_) => const LauncherScreen()),
-      );
-    } else {
-      ScaffoldMessenger.of(localContext).showSnackBar(
-        const SnackBar(content: Text("Por favor, ingresa tu nombre")),
       );
     }
   }
@@ -61,9 +58,7 @@ class _LoginScreenState extends State<LoginScreen> {
               ),
               const SizedBox(height: 16),
               TextButton(
-                onPressed: () {
-                  // Aquí podrías llevar a una pantalla de configuración para tutores
-                },
+                onPressed: () {}, // aquí puedes agregar navegación a modo tutor
                 child: const Text('Soy tutor'),
               ),
             ],

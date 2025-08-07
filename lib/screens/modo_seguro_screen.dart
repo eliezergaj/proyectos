@@ -1,14 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:flutter_tts/flutter_tts.dart';
-
-// Función reutilizable para leer texto en voz alta
-final FlutterTts flutterTts = FlutterTts();
-Future<void> speak(String text) async {
-  await flutterTts.setLanguage('es-ES');
-  await flutterTts.setPitch(1.0);
-  await flutterTts.speak(text);
-}
 
 class ModoSeguroScreen extends StatefulWidget {
   const ModoSeguroScreen({super.key});
@@ -63,20 +54,10 @@ class _ModoSeguroScreenState extends State {
 
   @override
   Widget build(BuildContext context) {
-    String textoModoSeguro = "Modo seguro del dispositivo. Estado actual: $_estadoActual. " +
-      "Opciones disponibles: crear punto de restauración, restaurar último punto, simular cambio de estado, ajustes del tutor bloqueados.";
-
     return Scaffold(
       appBar: AppBar(
         title: const Text('Modo Seguro'),
         backgroundColor: const Color(0xFF1D3557),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.volume_up),
-            tooltip: 'Escuchar',
-            onPressed: () => speak(textoModoSeguro),
-          ),
-        ],
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
@@ -123,3 +104,5 @@ class _ModoSeguroScreenState extends State {
     );
   }
 }
+
+
