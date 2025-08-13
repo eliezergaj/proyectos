@@ -56,10 +56,9 @@ dev_dependencies:
 # The following section is specific to Flutter packages.
 flutter:
   assets:
-    - assets/images/tutoriales/whatsapp_step1.png
-    - assets/images/tutoriales/whatsapp_step2.png
-    - assets/audios/
-    - assets/logo_acompanatech.png
+    - assets/images/logos/logo_acompanatech.png
+    - assets/images/backgrounds/login_bg.png
+    - assets/images/icons/  # Incluye todos los íconos
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.
